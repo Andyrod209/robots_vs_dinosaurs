@@ -1,9 +1,6 @@
-from dinosaurs import Dinosaurs
-from herd import Herd
-from fleet import RobotFleet
+from battlefield import Battlefield
 
-robot_fleet = RobotFleet()
-robot_fleet.create_fleet()
+first_battle = Battlefield()
 
-dino_herd = Herd()
-dino_herd.create_herd()
+
+
