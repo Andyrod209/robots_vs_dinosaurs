@@ -1,4 +1,4 @@
-from weapons import Weapon
+from weapon import Weapon
 import random
 
 class Robots:
