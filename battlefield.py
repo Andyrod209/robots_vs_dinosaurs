@@ -38,12 +38,16 @@ class Battlefield:
                 self.dino_turn()
                 self.robo_turn()
             
+            # removing any dinosaurs that have had their health fall to 0
             if self.herd.all_dinosaurs[self.random_dino_index].health == 0:
                 print(f"{self.herd.all_dinosaurs[self.random_dino_index].name} is out of health.")
                 self.herd.all_dinosaurs.remove(self.herd.all_dinosaurs[self.random_dino_index])
-            if len(self.herd.all_dinosaurs) == 0:
-                print("The Dinosurs have fallen and New life will be created!")
+            # removing any robot that has had their health fall to 0
+            if self.fleet.all_robots[self.random_robo_index].health == 0:
+                print(f"{self.fleet.all_robots[self.random_robo_index].name} is out of health.")
+                self.fleet.all_robots.remove(self.fleet.all_robots[self.random_robo_index])
 
+            self.display_winners()
                 
             
         
@@ -52,17 +56,17 @@ class Battlefield:
     def dino_turn(self):
         print("Dinosaurs attack first")
         # selecting a Dinosaur with the random number
-        random_robo_index = random.randint(0, (len(self.fleet.all_robots) - 1))
+        self.random_robo_index = random.randint(0, (len(self.fleet.all_robots) - 1))
         self.random_dino_index = random.randint(0, (len(self.herd.all_dinosaurs) - 1))
-        self.herd.all_dinosaurs[self.random_dino_index].attack(self.fleet.all_robots[random_robo_index])
+        self.herd.all_dinosaurs[self.random_dino_index].attack(self.fleet.all_robots[self.random_robo_index])
        
 
     def robo_turn(self):
         print("Robots attack first")
         # selecting a robot with the random number
-        random_robo_index = random.randint(0, (len(self.fleet.all_robots) - 1))
+        self.random_robo_index = random.randint(0, (len(self.fleet.all_robots) - 1))
         self.random_dino_index = random.randint(0, (len(self.herd.all_dinosaurs) - 1))
-        self.fleet.all_robots[random_robo_index].attack(self.herd.all_dinosaurs[self.random_dino_index])
+        self.fleet.all_robots[self.random_robo_index].attack(self.herd.all_dinosaurs[self.random_dino_index])
         
 
     def show_dino_opponent_options(self):
@@ -72,4 +76,9 @@ class Battlefield:
         pass
 
     def display_winners(self):
+        if len(self.fleet.all_robots) == 0:
+            print('Robots have failed their mission and will have to resort to dropping meteors.')
+        # displaying dinosaurs lost
+        if len(self.herd.all_dinosaurs) == 0:
+            print("The Dinosaurs have fallen and New life will be created!")
         pass
