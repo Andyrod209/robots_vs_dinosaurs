@@ -5,6 +5,7 @@ class Robots:
     def __init__(self, name):
         self.name = name
         self.health = 100
+        self.power_level = 100
         self.random_number = random.randint(1, 3)
         
         if self.random_number == 1:
@@ -22,7 +23,10 @@ class Robots:
         
     def attack(self, dinosaur):
         dinosaur.health = dinosaur.health - self.weapons.attack_power
+        # take 10 from power_level
+        self.power_level -= 10
         print(f'Dinosaur {dinosaur.name} was attacked by {self.name} with {self.weapons.name} for {self.weapons.attack_power} damage')
+        print(f'Power left {self.power_level} for {self.name}')
         print(f'Dinosaur {dinosaur.name} has {dinosaur.health} health remaining')
 
         
