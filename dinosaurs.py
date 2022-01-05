@@ -1,4 +1,4 @@
-from robot import Robots
+
 
 class Dinosaurs:
     def __init__(self, name, attack_power):

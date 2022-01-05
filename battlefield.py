@@ -1,8 +1,7 @@
 import random
 from fleet import Fleet
 from herd import Herd
-from dinosaurs import Dinosaurs
-from robot import Robots
+
 
 class Battlefield:
     def __init__(self):
@@ -32,19 +31,23 @@ class Battlefield:
             self.first_turn = random.randint(1, 2)
             if self.first_turn == 1:
                 self.robo_turn()
-                self.dino_turn()
+                print('')
+                
         
             elif self.first_turn == 2:
                 self.dino_turn()
-                self.robo_turn()
+                print('')
+                
             
             # removing any dinosaurs that have had their health fall to 0
-            if self.herd.all_dinosaurs[self.random_dino_index].health == 0:
+            if self.herd.all_dinosaurs[self.random_dino_index].health <= 0:
                 print(f"{self.herd.all_dinosaurs[self.random_dino_index].name} is out of health.")
+                print('')
                 self.herd.all_dinosaurs.remove(self.herd.all_dinosaurs[self.random_dino_index])
             # removing any robot that has had their health fall to 0
-            if self.fleet.all_robots[self.random_robo_index].health == 0:
+            if self.fleet.all_robots[self.random_robo_index].health <= 0:
                 print(f"{self.fleet.all_robots[self.random_robo_index].name} is out of health.")
+                print('')
                 self.fleet.all_robots.remove(self.fleet.all_robots[self.random_robo_index])
 
             self.display_winners()
@@ -54,7 +57,7 @@ class Battlefield:
 
 
     def dino_turn(self):
-        print("Dinosaurs attack first")
+        print("Dinosaurs attack")
         # selecting a Dinosaur with the random number
         self.random_robo_index = random.randint(0, (len(self.fleet.all_robots) - 1))
         self.random_dino_index = random.randint(0, (len(self.herd.all_dinosaurs) - 1))
@@ -62,18 +65,18 @@ class Battlefield:
        
 
     def robo_turn(self):
-        print("Robots attack first")
+        print("Robots attack")
         # selecting a robot with the random number
         self.random_robo_index = random.randint(0, (len(self.fleet.all_robots) - 1))
         self.random_dino_index = random.randint(0, (len(self.herd.all_dinosaurs) - 1))
         self.fleet.all_robots[self.random_robo_index].attack(self.herd.all_dinosaurs[self.random_dino_index])
         
-
+    # leaving these here if I'd like to add player options later
     def show_dino_opponent_options(self):
         pass 
-
     def show_robo_opponent_options(self):
         pass
+    
 
     def display_winners(self):
         if len(self.fleet.all_robots) == 0:
