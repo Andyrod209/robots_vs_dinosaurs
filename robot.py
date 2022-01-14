@@ -6,22 +6,38 @@ class Robots:
         self.name = name
         self.health = 100
         self.power_level = 100
-        self.random_number = random.randint(1, 3)
         
-        if self.random_number == 1:
-            self.weapons_to_select_from = ["flaming sword", 25]
-            self.weapons = Weapon(self.weapons_to_select_from[0],self.weapons_to_select_from[1])
+    def weapon_of_choice(self):
+        none_selected = True
+        while none_selected is True:
+            self.weapons = input('''
+Select for
+1 'flaming sword' for 25 damage 
+2 'machine gun' for 15 damage
+3 'missiles' for 21 damage
+selected: ''')
         
-        elif self.random_number == 2:
-            self.weapons_to_select_from = ["machine gun", 15]
-            self.weapons = Weapon(self.weapons_to_select_from[0],self.weapons_to_select_from[1])
+            if self.weapons == '1':
+            
+                self.weapons = Weapon("flaming sword", 25)
+                none_selected = False
         
-        elif self.random_number == 3:
-            self.weapons_to_select_from = ["missiles", 21]
-            self.weapons = Weapon(self.weapons_to_select_from[0],self.weapons_to_select_from[1])
+            elif self.weapons == '2':
+            
+                self.weapons = Weapon("machine gun", 15)
+                none_selected = False
+        
+            elif self.weapons == '3':
+            
+                self.weapons = Weapon("missiles", 21)
+                none_selected = False
 
+            else:
+                print('INVALID CHOICE!')
+        print('')
         
     def attack(self, dinosaur):
+        self.weapon_of_choice()
         dinosaur.health = dinosaur.health - self.weapons.attack_power
         # take 10 from power_level
         self.power_level -= 10

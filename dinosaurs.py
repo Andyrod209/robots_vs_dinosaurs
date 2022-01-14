@@ -19,6 +19,9 @@ class Dinosaurs:
         self.attack_power = self.attack_power_tuple[random.randint(0, len(self.attack_power_tuple) - 1)]
         robot.health = robot.health - self.attack_power
         print(f'Robot {robot.name} was attacked by {self.name} with {self.abilities[random.randint(0, len(self.abilities) - 1)]} for {self.attack_power} damage')
+        print('')
         print(f'Energy left {self.energy} for {self.name}')
+        print('')
         print(f'Robot {robot.name} has {robot.health} health remaining')
+        print('')
  
